@@ -1,17 +1,17 @@
 <template>
   <img alt="Vue logo" src="./assets/TTY.png">
-  <HelloWorld msg="Enter Your Destination"/>
+  <LandingPage msg="Enter Your Destination"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LandingPage from './components/HelloWorld.vue'
 //import SearchBar from './components/SearchBar.vue'
 //import BudgetBar from './components/BudgetBar.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    LandingPage
   }
 }
 </script>
