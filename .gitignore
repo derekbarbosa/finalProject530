@@ -28,5 +28,5 @@ coverage
 *.sw?
 
 # env variables
-config.env
+./backend/config.env
 .env
