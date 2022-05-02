@@ -30,3 +30,4 @@ coverage
 # env variables
 ./backend/config.env
 .env
+config.env
