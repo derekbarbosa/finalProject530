@@ -52,7 +52,7 @@ longitude = geocode[0]['geometry']['bounds']['northeast']['lng']
 
 hotels_list = find_hotels(latitude,longitude)
 
-print(hotels_list['results'][1:20])
+# print(hotels_list['results'][1:20])
 
 custom_list = {}
 
@@ -63,6 +63,7 @@ for i in range(0,20):
     results_list.append(hotels_list['results'][i]['photos'][0]['html_attributions'])
     results_list.append(hotels_list['results'][i]['rating'])
     custom_list[name] = results_list
-    print(custom_list)
+
+print(custom_list)
 
 #print(hotels_data['results'])
