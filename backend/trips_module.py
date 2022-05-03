@@ -1,5 +1,6 @@
 '''
 trips module - users can save trips to mogoDB and access them later
+uses google api to 
 '''
 
 import googlemaps
@@ -39,6 +40,8 @@ def get_trip(username, destination, departure_date):
 
 #coordinates == lat,longitude
 #destination == address
+
+#Gas Price of the Month
 gas_api_param={'api_key':GAS_KEY, 'series_id': 'TOTAL.RUUCUUS.M'}
 gas_api = requests.get('https://api.eia.gov/series/?', gas_api_param)
 gas_price = gas_api[1][7][1]
@@ -46,40 +49,36 @@ gas_price = gas_api[1][7][1]
 
 #retrieve lat,long from gmaps api
 def get_geocode(destination):
-    geocode = gmaps.geocode(destination)
-    latitude = geocode[0]['geometry']['bounds']['northeast']['lat']
-    longitude = geocode[0]['geometry']['bounds']['northeast']['lng']
-    return latitude,longitude
+    return gmaps.geocode(destination)
 
-#still in progress
 def reverse_geocode(coordinates):
     return gmaps.reverse_geocode(coordinates)
 
-#return an address, enter coordinates+radius, return multiple hotels
-def find_hotels(destination):
-    lat, long = get_geocode(destination)
-    hotel_data = gmaps.places_nearby(
-        location=(lat,long),
+#return an address, enter coordinates+radius, return multiple hotels --> output is JSON format
+def find_hotels(coordinates, distance):
+    hotel_list = gmaps.places_nearby(
+        location=coordinates,
         keyword="hotels",
         language="en-US",
         open_now=True,
         rank_by="distance",
         type="lodging",
+        radius=distance
     )
-    return hotel_data['results']
+    return hotel_list
 
-#returns singular hotel based on coordinates -- NEED TO FIX
-def get_hotel(lat, long):
-    hotel = gmaps.find_place(
-        "hotels",
-        "textquery",
-        fields=["formatted_address", "name", "geometry"],
-        location_bias=(lat, long),
-        language="en-US"
-    )
-    return hotel
+# #returns singular hotel based on coordinates/
+# def get_hotel(coordinates):
+#     hotel = gmaps.find_place(
+#         "hotels",
+#         "textquery",
+#         fields=["formatted_address", "name", "geometry"],
+#         location_bias=coordinates,
+#         language="en-US"
+#     )
+#     return hotel
 
-#returns driving directions, origin destination should be in strings
+#returns driving directions, origin destination should be in strings --> ouput is JSON format
 def get_directions(origin,destination):
     route = gmaps.directions(origin, destination)
     return route
