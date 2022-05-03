@@ -46,24 +46,27 @@ gas_price = gas_api[1][7][1]
 
 #retrieve lat,long from gmaps api
 def get_geocode(destination):
-    return gmaps.geocode(destination)
+    geocode = gmaps.geocode(destination)
+    latitude = geocode[0]['geometry']['bounds']['northeast']['lat']
+    longitude = geocode[0]['geometry']['bounds']['northeast']['lng']
+    return latitude,longitude
 
+#still in progress
 def reverse_geocode(coordinates):
     return gmaps.reverse_geocode(coordinates)
 
 #return an address, enter coordinates+radius, return multiple hotels
-def find_hotels(coordinates, distance):
-    hotel_list = gmaps.places_nearby(
-        location=coordinates,
+def find_hotels(destination):
+    lat, long = get_geocode(destination)
+    hotel_data = gmaps.places_nearby(
+        location=(lat,long),
         keyword="hotels",
         language="en-US",
         open_now=True,
         rank_by="distance",
         type="lodging",
-        radius=distance
     )
-
-    return hotel_list
+    return hotel_data['results']
 
 #returns singular hotel based on coordinates/
 def get_hotel(coordinates):
