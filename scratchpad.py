@@ -59,7 +59,7 @@ custom_list = {}
 for i in range(0,20):
     name = hotels_list['results'][i]['name']
     results_list = []
-    results_list.append(hotels_list['results'][i]['vicinity'], hotels_list['results'][i]['photos'][0]['html_attributions'], hotels_list['results'[i]['rating'])
+    results_list.append(hotels_list['results'][i]['vicinity'], hotels_list['results'][i]['photos'][0]['html_attributions'], hotels_list['results'][i]['rating'])
     custom_list[name] = results_list
     print(custom_list)
 
