@@ -54,7 +54,13 @@ hotels_list = find_hotels(latitude,longitude)
 
 print(hotels_list['results'][1:20])
 
+custom_list = {}
+
 for i in range(0,20):
-    print(hotels_list['results'][i]['name'])
-    
+    name = hotels_list['results'][i]['name']
+    results_list = []
+    results_list.append(hotels_list['results'][i]['vicinity'], hotels_list['results'][i]['photos'][0]['html_attributions'], hotels_list['results'[i]['rating'])
+    custom_list[name] = results_list
+    print(custom_list)
+
 #print(hotels_data['results'])
