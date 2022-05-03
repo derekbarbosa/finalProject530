@@ -1,10 +1,19 @@
+import googlemaps
+import os
 from flask import Flask
 from flask_restful import Resource, Api
+from datetime import datetime
+
 from . import user_module as user
 from . import trips_module as trips
 
 app = Flask(__name__)
 api = Api(app, catch_all_404s=True)
+
+load_dotenv()
+
+API_KEY = os.getenv("GOOGLE_API_KEY")
+gmaps = googlemaps.Client(key=API_KEY)
 
 class Home(Resource):
     def get(self):
