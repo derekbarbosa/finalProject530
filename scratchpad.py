@@ -35,11 +35,23 @@ def find_hotels(lat,long):
 
     return hotel_list
 
+
+def get_hotel(lat, long):
+    hotel = gmaps.find_place(
+        "hotels",
+        "textquery",
+        fields=["formatted_address", "name", "geometry"],
+        location_bias=(lat, long),
+        language="en-US"
+    )
+    return hotel['candidates']
+
 geocode = get_geocode("Boston, MA")
 latitude = geocode[0]['geometry']['bounds']['northeast']['lat']
 longitude = geocode[0]['geometry']['bounds']['northeast']['lng']
 
 hotels_data = find_hotels(latitude,longitude)
-print(hotels_data['results'])
+#print(hotels_data['results'])
 
-hotel_data = get_hotel()
+hotel_data = get_hotel(latitude, longitude)
+print(hotel_data)

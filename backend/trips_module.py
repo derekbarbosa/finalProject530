@@ -68,13 +68,13 @@ def find_hotels(destination):
     )
     return hotel_data['results']
 
-#returns singular hotel based on coordinates/
-def get_hotel(coordinates):
+#returns singular hotel based on coordinates -- NEED TO FIX
+def get_hotel(lat, long):
     hotel = gmaps.find_place(
         "hotels",
         "textquery",
         fields=["formatted_address", "name", "geometry"],
-        location_bias=coordinates,
+        location_bias=(lat, long),
         language="en-US"
     )
     return hotel
