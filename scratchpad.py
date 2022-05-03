@@ -53,4 +53,8 @@ longitude = geocode[0]['geometry']['bounds']['northeast']['lng']
 hotels_list = find_hotels(latitude,longitude)
 
 print(hotels_list['results'][1:20])
+
+for i in range(0,20):
+    print(hotels_list['results'][i]['name'])
+    
 #print(hotels_data['results'])
