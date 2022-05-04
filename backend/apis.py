@@ -4,8 +4,8 @@ from flask import Flask
 from flask_restful import Resource, Api
 from datetime import datetime
 
-from backend import user_module as user
-from backend import trips_module as trips
+import user_module as user
+import trips_module as trips
 
 app = Flask(__name__)
 api = Api(app, catch_all_404s=True)
