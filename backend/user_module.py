@@ -1,7 +1,7 @@
 ## mongodb username: EC530_TTY
 
 import pymongo
-from dotenv import dotenv
+import dotenv
 import os
 
 from pymongo import MongoClient
