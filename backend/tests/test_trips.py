@@ -1,5 +1,4 @@
 import pytest
-import os
 import logging
 
 import trips_module as trips
