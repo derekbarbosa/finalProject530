@@ -1,8 +1,10 @@
-## mongodb username: ec530TTY
+## mongodb username: EC530_TTY
 
-from pymongo import MongoClient
+import pymongo
 from dotenv import dotenv
 import os
+
+from pymongo import MongoClient
 
 load_dotenv()
 
