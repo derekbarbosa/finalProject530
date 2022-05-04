@@ -5,7 +5,7 @@ import pymongo
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from . import user_module as user
+import user_module as user
 
 load_dotenv()
 
