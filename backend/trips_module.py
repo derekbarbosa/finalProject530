@@ -53,7 +53,7 @@ def reverse_geocode(coordinates):
 
 #return num_hotels hotels from a google maps hotels query at destination; uses geocode to get lat,long tuple from desination
 def find_hotels(destination, num_hotels):
-    if isinstance(destination, str) and isinstance(num_hotels, int):
+    if isinstance(destination, str) and isinstance(num_hotels, str):
         pass
     else:
         return -1
@@ -76,7 +76,7 @@ def find_hotels(destination, num_hotels):
 
     custom_list = {}
 
-    for i in range(0, num_hotels):
+    for i in range(0, int(num_hotels)):
         name = hotels_list['results'][i]['name']
         results_list = []
         results_list.append("vicinity " + hotels_list['results'][i]['vicinity'])
@@ -123,10 +123,8 @@ def get_directions(origin,destination):
 
 #returns gas cost for trip based on inputed distance, tank size and mpg
 def get_gas_cost(origin, destination, tank_size, mpg):
-    if isinstance(tank_size, int) and isinstance(mpg, int):
-        pass:
-    else:
-        return -1
+    mpg = int(mpg)
+    tank_size = int(tank_size)
 
     gas_api_param={'api_key':GAS_KEY, 'series_id': 'TOTAL.RUUCUUS.M'}
     gas_api = requests.get('https://api.eia.gov/series/?', gas_api_param)

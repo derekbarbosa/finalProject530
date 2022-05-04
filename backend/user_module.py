@@ -1,7 +1,3 @@
-'''
-SILL TO DO: REPLACE MONGODB URL IN EACH FUNCTION IN THIS FILE
-'''
-
 ## mongodb username: ec530TTY
 
 from pymongo import MongoClient
@@ -13,7 +9,7 @@ load_dotenv()
 DB_PASS = os.environ.get("MONGO_DB_PASS")
 
 def check_user(username, password, recovery_email):
-    client = MongoClient(f"mongodb+srv://ec530TTY:{DB_PASS}@cluster0.ds0t5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    client = MongoClient(f"mongodb+srv://EC530_TTY:{DB_PASS}@cluster0.ds0t5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client["TTY"]
     users_collection = db["Users"]
     if users_collection.find_one({"username": username}):
@@ -22,7 +18,7 @@ def check_user(username, password, recovery_email):
         return 0
 
 def add_user(username, password, recovery_email):
-    client = MongoClient(f"mongodb+srv://ec530TTY:{DB_PASS}@cluster0.ds0t5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    client = MongoClient(f"mongodb+srv://EC530_TTY:{DB_PASS}@cluster0.ds0t5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client["TTY"]
     users_collection = db["Users"]
     if check_user(username, password, recovery_email) == 0:
@@ -32,7 +28,7 @@ def add_user(username, password, recovery_email):
         return "User already exists"
 
 def authenticate_user(username, password):
-    client = MongoClient(f"mongodb+srv://ec530TTY:{DB_PASS}@cluster0.ds0t5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    client = MongoClient(f"mongodb+srv://EC530_TTY:{DB_PASS}@cluster0.ds0t5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client["TTY"]
     users_collection = db["Users"]
     doc = users_collection.find_one({"username":username})
