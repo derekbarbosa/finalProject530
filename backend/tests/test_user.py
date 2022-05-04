@@ -5,7 +5,6 @@ import pymongo
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from . import trips_module as trips
 from . import user_module as user
 
 load_dotenv()
