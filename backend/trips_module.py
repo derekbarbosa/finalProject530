@@ -1,6 +1,6 @@
 '''
 trips module - users can save trips to mogoDB and access them later
-uses google api to 
+uses google api for directions, trip distance, hotel search, total cost
 '''
 
 import googlemaps
@@ -37,14 +37,10 @@ def get_trip(username, destination, departure_date):
     else:
         return 0
 
-
-#coordinates == lat,longitude
-#destination == address
-
-#Gas Price of the Month
-gas_api_param={'api_key':GAS_KEY, 'series_id': 'TOTAL.RUUCUUS.M'}
-gas_api = requests.get('https://api.eia.gov/series/?', gas_api_param)
-gas_price = gas_api[1][7][1]
+#Gas Price of the Month --> added below to get_gas_cost()
+# gas_api_param={'api_key':GAS_KEY, 'series_id': 'TOTAL.RUUCUUS.M'}
+# gas_api = requests.get('https://api.eia.gov/series/?', gas_api_param)
+# gas_price = gas_api[1][7][1]
 
 
 #retrieve lat,long from gmaps api
@@ -54,8 +50,19 @@ def get_geocode(destination):
 def reverse_geocode(coordinates):
     return gmaps.reverse_geocode(coordinates)
 
-#return an address, enter coordinates+radius, return multiple hotels --> output is JSON format
-def find_hotels(coordinates, distance):
+#return num_hotels hotels from a google maps hotels query at destination; uses geocode to get lat,long tuple from desination
+def find_hotels(destination, num_hotels):
+    if isinstance(destination, str) and isinstance(num_hotels, int):
+        pass
+    else:
+        return -1
+        
+    g_code = get_deocode(desitnation)
+
+    latitude = g_code[0]['geometry']['bounds']['northeast']['lat']
+    longitude = g_code[0]['geometry']['bounds']['northeast']['lng']
+    coordinates = (latitude, longitutde)
+
     hotel_list = gmaps.places_nearby(
         location=coordinates,
         keyword="hotels",
@@ -65,7 +72,18 @@ def find_hotels(coordinates, distance):
         type="lodging",
         radius=distance
     )
-    return hotel_list
+
+    custom_list = {}
+
+    for i in range(0, num_hotels):
+        name = hotels_list['results'][i]['name']
+        results_list = []
+        results_list.append("vicinity " + hotels_list['results'][i]['vicinity'])
+        results_list.append("Image " + hotels_list['results'][i]['photos'][0]['html_attributions'])
+        results_list.append("Rating " + hotels_list['results'][i]['rating'])
+        custom_list[name] = results_list
+
+    return custom_list
 
 # #returns singular hotel based on coordinates/
 # def get_hotel(coordinates):
@@ -78,10 +96,52 @@ def find_hotels(coordinates, distance):
 #     )
 #     return hotel
 
+
 #returns driving directions, origin destination should be in strings --> ouput is JSON format
 def get_directions(origin,destination):
-    route = gmaps.directions(origin, destination)
-    return route
+    if isinstance(origin, str) and isinstance(destination, str):
+        route = gmaps.directions(origin, destination)
 
-def get_mpg(car):
-    pass
+        trip_distance = route[0]['legs'][0]['distance']['text']
+        trip_distance = "".join(filter(str.isdigit,trip_distance))
+        trip_distance = int(trip_distance)
+        
+        trip_duration = route[0]['legs'][0]['duration']['text']
+
+        steps = route[0]['legs'][0]['steps']
+        i = 0
+        directions = []
+        while steps[i]:
+            directions.append(f"step {i}: " + steps[i]['html_instructions'])
+            i += 1
+        
+        return trip_distance, trip_duration, directions
+
+    else:
+        return 0, 0, 0
+
+#returns gas cost for trip based on inputed distance, tank size and mpg
+def get_gas_cost(origin, destination, tank_size, mpg):
+    if isinstance(tank_size, int) and isinstance(mpg, int):
+        pass:
+    else:
+        return -1
+
+    gas_api_param={'api_key':GAS_KEY, 'series_id': 'TOTAL.RUUCUUS.M'}
+    gas_api = requests.get('https://api.eia.gov/series/?', gas_api_param)
+    gas_price = gas_api[1][7][1]
+
+    trip_distance, trip_duration, directions = get_directions(origin, destination)
+    if(trip_distance == 0):
+        return -1
+    else:
+        gallons_needed = math.ceil(trip_distance/mpg)
+
+        if(gallons_needed/tank_size < 1):
+            refills_needed = 0
+        else:
+            refills_needed = math.ceil(gallons_needed/tank_size)
+
+        cost = refills_needed*(tank_size*gas_price)
+
+        return cost
