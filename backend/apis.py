@@ -40,13 +40,39 @@ class AddTrip(Resource):
 class GetTrip(Resource):
     def get(self, username, destination, departure_date):
         return trips.get_trip(self, username, destination, departure_date)
-        
 
+class GetHotels(Resource):
+    def get(self, destination, num_hotels):
+        ret_val = trips.find_hotels(destination, num_hotels)
+        if ret_val < 0:
+            return "Failed get request"
+        else:
+            return ret_val
+
+class GetDirections(Resource):
+    def get(self, origin, destination):
+        distance, duration, directions = trips.get_directions(origin, destination)
+        if distance == 0 and duration == 0 and directions == 0:
+            return "Failed get request"
+        else:
+            return distance, duration, directions
+
+class GetGasCost(Resource):
+    def get(self, origin, destination, tank_size, mpg):
+        cost_val = trips.get_gas_cost(origin, destination, tank_size, mpg)
+        if cost_val < 0:
+            return "Failed get request"
+        else:
+            return cost_val
+        
 api.add_resource(Home, "/")
 api.add_resource(AddUser, "/user-module/add-user/<string:username>/<string:password>/<string:recovery_email>")
 api.add_resource(AuthenticateUser, "/user-module/authenticate-user/<string:username>/<string:password>")
 api.add_resource(AddTrip, "/trips-module/add-trip/<string:username>/<string:destination>/<string:departure_date>/<string:return_date>/<string:airline>/<string:hotel>")
 api.add_resource(GetTrip, "/trips-module/get-trip/<string:username>/<string:destination>/<string:departure_date>")
+api.add_resource(GetHotels, "/trips-module/get-hotels/<string:destination>/<int:num_hotels>")
+api.add_resource(GetDirections, "/trips-module/get-directions/<string:origin>/<string:destination>")
+api.add_resource(GetGasCost, "/trips-module/get-gas-cost/<string:origin>/<string:destination>/<int:tank_size>/<int:mpg>")
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port=80, debug=True)

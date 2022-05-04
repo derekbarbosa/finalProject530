@@ -1,6 +1,7 @@
 '''
 trips module - users can save trips to mogoDB and access them later
 uses google api for directions, trip distance, hotel search, total cost
+uses EIA api to get current cost of petroleum gasoline
 '''
 
 import googlemaps
@@ -56,7 +57,7 @@ def find_hotels(destination, num_hotels):
         pass
     else:
         return -1
-        
+
     g_code = get_deocode(desitnation)
 
     latitude = g_code[0]['geometry']['bounds']['northeast']['lat']
