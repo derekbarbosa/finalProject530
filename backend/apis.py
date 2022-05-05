@@ -79,4 +79,4 @@ api.add_resource(GetDirections, "/trips-module/get-directions/<string:origin>/<s
 api.add_resource(GetGasCost, "/trips-module/get-gas-cost/<string:origin>/<string:destination>/<int:tank_size>/<int:mpg>")
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port=80, debug=True)
+    app.run(host = 'localhost', port=8080, debug=True)
