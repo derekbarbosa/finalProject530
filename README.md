@@ -35,12 +35,12 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!-- About the Project -->
 ## :star2: About the Project
 
-The goal of this EC530 project "hackathon" was to understand how P2P networks function, and use that knowledge to create a P2P chat application that is able to send and receive messages over networks.
-
-More information can be found [here](https://docs.google.com/presentation/d/1abC3gaqgNzYtCQxYuvATGqdxt4zt9GU_XAmyPMJ8on4/edit#slide=id.gce96e2614d_0_60)
+The goal of this project is to implement an all inclusive, self-service mobile application for travel planning. Many applications and websites such as kayak, expeida, and Google do bookings for accomodations, rentals, and flights, but do not have an easy to use platform for budgeting alongside planning. This application solves that problem. Travel There Yourself (TTY) gives users an easy to use platform for planning their vacations, road trips, and weekend getaways, keeping costs transparent so users can spend as little or as much as possible. 
 
 <!-- APIs Documentation -->
 ### 📱: API Documentation
+
+All APIs developed for this application are deployed via Flask REST Framework for Python on AWS EC2. We use the Google Maps API to give directions and hotel information to users. Apis are listed below:
 
 <!-- Features -->
 ### :dart: Features
