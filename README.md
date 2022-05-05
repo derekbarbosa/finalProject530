@@ -45,9 +45,10 @@ All APIs developed for this application are deployed via Flask REST Framework fo
 <!-- Features -->
 ### :dart: Features
 
-- Asynchronus Peer-to-Peer chat over LAN
-- Auto-saved, timestamped chat logs
-- Built-in joke-teller :)
+- User Authentication using MongoDB
+- Trip route planning using Google Maps API
+- Hotel search feature using Google Geocode and Maps APIs
+- Gas cost calculator using EIA API
 
 
 <!-- Getting Started -->
