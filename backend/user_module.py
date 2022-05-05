@@ -41,6 +41,3 @@ def authenticate_user(username, password):
             return 0
     else:
         return 0
-
-
-
