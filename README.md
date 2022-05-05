@@ -8,7 +8,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 -->
 <div align="center">
 
-  <h1>🚙: Travel There Yourself 🚗:</h1>
+  <h1>🚙 Travel There Yourself 🚗</h1>
   
   <p>
     An all-in-one self-service travel application
