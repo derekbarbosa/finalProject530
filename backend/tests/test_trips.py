@@ -24,3 +24,9 @@ def test_get_gas_cost():
     mpg = 25
     assert trips.get_gas_cost(origin, destination, tank_size, mpg) == True
     logging.info("get gas cost test passed")
+
+if __name__ == "__main__":
+    test_find_hotels()
+    test_get_directions()
+    test_get_gas_cost()
+    print("All trips module tests passed")

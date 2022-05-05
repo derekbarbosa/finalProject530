@@ -5,7 +5,7 @@ import pymongo
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from . import user_module as user
+import user_module as user
 
 load_dotenv()
 
@@ -46,3 +46,8 @@ def test_authenticate_user():
     logging.info("authenticate user test passed")
     pass
 
+    if __name__ == '__main__':
+        test_check_user()
+        test_add_user()
+        test_authenticate_user()
+        print("All user module tests passed")
