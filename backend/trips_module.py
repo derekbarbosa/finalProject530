@@ -6,6 +6,7 @@ uses EIA api to get current cost of petroleum gasoline
 
 import googlemaps
 import requests
+import math
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from datetime import datetime
@@ -58,20 +59,19 @@ def find_hotels(destination, num_hotels):
     else:
         return -1
 
-    g_code = get_deocode(desitnation)
+    g_code = get_geocode(destination)
 
     latitude = g_code[0]['geometry']['bounds']['northeast']['lat']
     longitude = g_code[0]['geometry']['bounds']['northeast']['lng']
-    coordinates = (latitude, longitutde)
+    coordinates = (latitude, longitude)
 
-    hotel_list = gmaps.places_nearby(
+    hotels_list = gmaps.places_nearby(
         location=coordinates,
         keyword="hotels",
         language="en-US",
         open_now=True,
         rank_by="distance",
         type="lodging",
-        radius=distance
     )
 
     custom_list = {}
@@ -85,18 +85,6 @@ def find_hotels(destination, num_hotels):
         custom_list[name] = results_list
 
     return custom_list
-
-# #returns singular hotel based on coordinates/
-# def get_hotel(coordinates):
-#     hotel = gmaps.find_place(
-#         "hotels",
-#         "textquery",
-#         fields=["formatted_address", "name", "geometry"],
-#         location_bias=coordinates,
-#         language="en-US"
-#     )
-#     return hotel
-
 
 #returns driving directions, origin destination should be in strings --> ouput is JSON format
 def get_directions(origin,destination):
@@ -131,6 +119,7 @@ def get_gas_cost(origin, destination, tank_size, mpg):
     gas_price = gas_api[1][7][1]
 
     trip_distance, trip_duration, directions = get_directions(origin, destination)
+    
     if(trip_distance == 0):
         return -1
     else:
