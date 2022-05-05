@@ -1,7 +1,9 @@
 import os
 import googlemaps
-import dotenv
 
+
+
+from dotenv import load_dotenv
 from flask import Flask
 from flask_restful import Resource, Api
 from datetime import datetime
