@@ -94,7 +94,7 @@ def get_gas_cost(trip_distance, tank_size, mpg):
     print(gallons_needed)
 
     if(gallons_needed/tank_size < 1):
-        refills_needed = 0;
+        refills_needed = 0
     else:
         refills_needed = math.ceil(gallons_needed/tank_size)
 
