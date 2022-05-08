@@ -1,7 +1,7 @@
 import pytest
 import logging
 
-import trips_module as trips
+from .. import trips_module as trips
 
 def test_find_hotels():
     destination = "Boston, MA"
