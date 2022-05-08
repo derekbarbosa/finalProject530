@@ -1,5 +1,4 @@
 name: Python CI/CD
-
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
@@ -48,6 +47,10 @@ jobs:
 
       # Testing with Pytest
       - name: Test with pytest
+        env: 
+          MONGO_DB_PASS: ${{ secrets.MONGO_DB_PASS }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: |
           pytest -vv
 
