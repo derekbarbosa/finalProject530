@@ -38,7 +38,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 The goal of this project is to implement an all inclusive, self-service mobile application for travel planning. Many applications and websites such as kayak, expeida, and Google do bookings for accomodations, rentals, and flights, but do not have an easy to use platform for budgeting alongside planning. This application solves that problem. Travel There Yourself (TTY) gives users an easy to use platform for planning their vacations, road trips, and weekend getaways, keeping costs transparent so users can spend as little or as much as possible. 
 
 <!-- APIs Documentation -->
-### 📱: API Documentation
+### 📱 API Documentation
 
 All APIs developed for this application are deployed via Flask REST Framework for Python on AWS EC2. We use the Google Maps API to give directions and hotel information to users. Apis are listed below:
 - AddUser
