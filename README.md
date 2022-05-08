@@ -41,7 +41,45 @@ The goal of this project is to implement an all inclusive, self-service mobile a
 ### 📱: API Documentation
 
 All APIs developed for this application are deployed via Flask REST Framework for Python on AWS EC2. We use the Google Maps API to give directions and hotel information to users. Apis are listed below:
+- AddUser
+  - Post: add a user to the application's MongoDB Users collection.
+    - Arguments: Username, Password, Email, 
+    - Return values: "User successfully added" or "User already exists"
+  - Get: check if a user already exists in the database
+    - Arguments: Username, Password, Email
+    - Return values: 1 on success, 0 if User doesn't exists
+   
+- AuthenticateUser
+  - Get: Authenticate a User on login to the application
+    - Arguments: Username, Password
+    - Return values: 1 on success, 0 on failure
 
+
+- AddTrip
+  - Post: add a trip to the application's MongoDB Trips collection
+    - Arguments: username, destination, departure date, return date, airline (yet to implement flights funtionality), hotel
+    - Return values: "Trip to {destination} added" or "Trip to {destination} already exists"
+ 
+- GetTrip
+  - Get: Retrieve a User's trip from the database
+    - Arguments: username, destination, departure date
+    - Return values: JSON containing matching trip data for arguments
+
+- FindHotels
+  - Get: Uses google maps API to retrieve a specified number of closest hotels to a specified destination
+    - Arguments: destination, num_hotels
+    - Return values: JSON structure containing the specified number of closest hotels and their address, rating, and an image
+
+- GetDirections
+  - Get: Uses google maps API to get the driving directions from a specified origin to a destination
+    - Arguments: origin, destination
+    - Return values: trip distance, trip destination, html verbose directions
+
+- GetGasCost
+  - Get: Uses EIA API to estimate the total gas cost of a trip based on the day's median gas price
+    - Arguments: origin, destination, gas tank size, miles per gallon (mpg)
+    - Return value: dollar value of estimated cost (int)
+  
 <!-- Features -->
 ### :dart: Features
 
