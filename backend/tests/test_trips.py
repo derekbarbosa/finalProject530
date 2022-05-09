@@ -7,7 +7,7 @@ def test_find_hotels():
     destination = "Boston, MA"
     num_hotels = 20
     result = trips.find_hotels(destination, num_hotels)
-    assert result == True
+    assert isinstance(result, dict) == True
     logging.info("find hotels test passed")
 
 def test_get_directions():
@@ -22,7 +22,7 @@ def test_get_gas_cost():
     destination = "Philadelphia"
     tank_size = 18
     mpg = 25
-    assert trips.get_gas_cost(origin, destination, tank_size, mpg) == True
+    assert trips.get_gas_cost(origin, destination, tank_size, mpg) is not None
     logging.info("get gas cost test passed")
 
 if __name__ == "__main__":

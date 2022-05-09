@@ -52,7 +52,7 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: |
-          pytest -vv
+          pytest -vv --ignore=./backend/tests/test_user.py
 
       # Running Autoyapf to format with Pep8
       - name : Run Autoyapf 
