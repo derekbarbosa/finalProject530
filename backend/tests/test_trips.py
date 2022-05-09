@@ -5,7 +5,7 @@ from .. import trips_module as trips
 
 def test_find_hotels():
     destination = "Boston, MA"
-    num_hotels = 20
+    num_hotels = 10
     result = trips.find_hotels(destination, num_hotels)
     assert isinstance(result, dict) == True
     logging.info("find hotels test passed")
