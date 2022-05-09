@@ -72,7 +72,7 @@ def find_hotels(destination, num_hotels):
     custom_list = {}
     results_list = []
 
-    for i in range(0, int(num_hotels)):
+    for i in range(0, int(len(hotels_list))):
         name = hotels_list['results'][i]['name']
         results_list.append("vicinity: " + str(hotels_list['results'][i]['vicinity']))
         results_list.append("Rating: " + str(hotels_list['results'][i]['rating']))
